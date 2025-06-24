@@ -65,9 +65,9 @@ bookRoutes.get('/:bookId', async (req: Request, res: Response) => {
             data: book
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(404).json({
             success: false,
-            message: "Validation failed",
+            message: "Book not found",
             error
         })
     }
@@ -85,9 +85,9 @@ bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
             data: book
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             success: false,
-            message: "Validation failed",
+            message: "Faild to update book",
             error
         })
     }
@@ -110,9 +110,9 @@ bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
             data: null
         })
     } catch (error) {
-        res.status(400).json({
+        res.status(404).json({
             success: false,
-            message: "Validation failed",
+            message: "Book not found",
             error
         })
     }

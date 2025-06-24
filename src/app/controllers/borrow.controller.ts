@@ -37,7 +37,7 @@ borrowRoutes.post('/', async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        res.status(500).json({
+        res.status(404).json({
             success: false,
             message: "Failed to borrow book",
             error

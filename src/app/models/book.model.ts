@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IBook, IBookMethods } from "../interfaces/book.interface";
+// import validator from 'validator';
 
 const bookSchema = new Schema<IBook, {}, IBookMethods>({
     title: {
@@ -14,6 +15,7 @@ const bookSchema = new Schema<IBook, {}, IBookMethods>({
     },
     genre: {
         type: String,
+        uppercase: true,
         required: [true, "Genre is required"],
         enum: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"],
     },
