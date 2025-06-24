@@ -81,8 +81,26 @@ bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
 
         res.status(201).json({
             success: true,
-            message: "Books updated successfully",
+            message: "Book updated successfully",
             data: book
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Validation failed",
+            error
+        })
+    }
+})
+
+bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
+    try {
+        const bookId = req.params.bookId;
+        const book = await Book.findByIdAndDelete(bookId);
+        res.status(201).json({
+            success: true,
+            message: "Book deleted successfully",
+            data: null
         })
     } catch (error) {
         res.status(400).json({
