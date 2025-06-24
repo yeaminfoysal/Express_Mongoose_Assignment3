@@ -3,6 +3,9 @@
 
 A Node.js + Express + MongoDB RESTful API for managing books and borrowing records. It supports book creation, listing, deletion, borrowing, and summary reporting.
 
+## 🔴 Live Server
+
+URL: https://mongoose-assignment3-server.vercel.app/
 
 ## ⚙️ Technologies Used
 
