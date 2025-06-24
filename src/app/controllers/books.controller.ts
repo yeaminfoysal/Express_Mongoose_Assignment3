@@ -1,4 +1,4 @@
-import express, { Request, response, Response } from "express";
+import express, { Request, Response } from "express";
 import { Book } from "../models/book.model";
 
 export const bookRoutes = express.Router();
@@ -24,14 +24,20 @@ bookRoutes.post('/', async (req: Request, res: Response) => {
 bookRoutes.get('/', async (req: Request, res: Response) => {
     try {
         let genre = req.query.filter as string;
+        const sortBy = (req.query.sortBy as string) || 'title';
         const sortOrder = req.query.sort === 'desc' ? -1 : 1;
         const limit = parseInt(req.query.limit as string) || 10;
+
+        const sortOptions: Record<string, 1 | -1> = {
+            [sortBy]: sortOrder
+        };
+        
         let books = [];
 
         if (genre) {
-            books = await Book.find({ genre: genre?.toUpperCase() }).sort({ title: sortOrder }).limit(limit);
+            books = await Book.find({ genre: genre?.toUpperCase() }).sort(sortOptions).limit(limit);
         } else {
-            books = await Book.find().sort({ title: sortOrder }).limit(limit);
+            books = await Book.find().sort({ [sortBy]: sortOrder }).limit(limit);
         }
 
         res.status(200).json({
