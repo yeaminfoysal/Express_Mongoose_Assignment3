@@ -1,7 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IBook, IBookMethods } from "../interfaces/book.interface";
 import { Borrow } from "./borrow.model";
-// import validator from 'validator';
 
 const bookSchema = new Schema<IBook, {}, IBookMethods>({
     title: {

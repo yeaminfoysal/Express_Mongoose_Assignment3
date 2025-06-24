@@ -104,7 +104,7 @@ exports.bookRoutes.patch('/:bookId', (req, res) => __awaiter(void 0, void 0, voi
 exports.bookRoutes.delete('/:bookId', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bookId = req.params.bookId;
-        const deletedBook = yield book_model_1.Book.findByIdAndDelete(bookId);
+        const deletedBook = yield book_model_1.Book.findOneAndDelete({ _id: bookId });
         if (!deletedBook) {
             res.status(404).json({
                 success: false,
