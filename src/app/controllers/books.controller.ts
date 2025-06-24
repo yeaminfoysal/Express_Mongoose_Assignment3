@@ -31,7 +31,7 @@ bookRoutes.get('/', async (req: Request, res: Response) => {
         const sortOptions: Record<string, 1 | -1> = {
             [sortBy]: sortOrder
         };
-        
+
         let books = [];
 
         if (genre) {
@@ -44,6 +44,25 @@ bookRoutes.get('/', async (req: Request, res: Response) => {
             success: true,
             message: "Books retrieved successfully",
             data: books
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Validation failed",
+            error
+        })
+    }
+});
+
+bookRoutes.get('/:bookId', async (req: Request, res: Response) => {
+    try {
+        const bookId = req.params.bookId;
+        const book = await Book.findById(bookId);
+
+        res.status(200).json({
+            success: true,
+            message: "Books retrieved successfully",
+            data: book
         })
     } catch (error) {
         res.status(400).json({
