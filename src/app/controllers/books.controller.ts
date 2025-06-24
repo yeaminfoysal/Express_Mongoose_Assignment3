@@ -71,4 +71,24 @@ bookRoutes.get('/:bookId', async (req: Request, res: Response) => {
             error
         })
     }
+});
+
+bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
+    try {
+        const bookId = req.params.bookId;
+        const updatedBook = req.body;
+        const book = await Book.findByIdAndUpdate(bookId, updatedBook, { new: true });
+
+        res.status(201).json({
+            success: true,
+            message: "Books updated successfully",
+            data: book
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: "Validation failed",
+            error
+        })
+    }
 })
