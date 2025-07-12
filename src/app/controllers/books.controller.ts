@@ -26,7 +26,7 @@ bookRoutes.get('/', async (req: Request, res: Response) => {
         let genre = req.query.filter as string;
         const sortBy = (req.query.sortBy as string) || 'title';
         const sortOrder = req.query.sort === 'desc' ? -1 : 1;
-        const limit = parseInt(req.query.limit as string) || 10;
+        const limit = parseInt(req.query.limit as string)
 
         const sortOptions: Record<string, 1 | -1> = {
             [sortBy]: sortOrder

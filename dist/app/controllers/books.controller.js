@@ -39,7 +39,7 @@ exports.bookRoutes.get('/', (req, res) => __awaiter(void 0, void 0, void 0, func
         let genre = req.query.filter;
         const sortBy = req.query.sortBy || 'title';
         const sortOrder = req.query.sort === 'desc' ? -1 : 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit);
         const sortOptions = {
             [sortBy]: sortOrder
         };
