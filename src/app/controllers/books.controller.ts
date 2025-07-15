@@ -85,6 +85,7 @@ bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
         }
 
         await book.updateAvailability(); // ✅ Now safe after null check
+        await book.save();
 
         res.status(201).json({
             success: true,
@@ -100,7 +101,6 @@ bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
         });
     }
 });
-
 
 
 bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
