@@ -87,17 +87,21 @@ exports.bookRoutes.patch('/:bookId', (req, res) => __awaiter(void 0, void 0, voi
         const bookId = req.params.bookId;
         const updatedBook = req.body;
         const book = yield book_model_1.Book.findByIdAndUpdate(bookId, updatedBook, { new: true });
+        if (!book) {
+            return;
+        }
+        yield book.updateAvailability(); // ✅ Now safe after null check
         res.status(201).json({
             success: true,
             message: "Book updated successfully",
-            data: book
+            data: book,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Faild to update book",
-            error
+            message: "Failed to update book",
+            error,
         });
     }
 }));
