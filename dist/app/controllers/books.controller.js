@@ -91,6 +91,7 @@ exports.bookRoutes.patch('/:bookId', (req, res) => __awaiter(void 0, void 0, voi
             return;
         }
         yield book.updateAvailability(); // ✅ Now safe after null check
+        yield book.save();
         res.status(201).json({
             success: true,
             message: "Book updated successfully",
