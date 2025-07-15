@@ -77,21 +77,31 @@ bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
     try {
         const bookId = req.params.bookId;
         const updatedBook = req.body;
+
         const book = await Book.findByIdAndUpdate(bookId, updatedBook, { new: true });
+
+        if (!book) {
+            return
+        }
+
+        await book.updateAvailability(); // ✅ Now safe after null check
 
         res.status(201).json({
             success: true,
             message: "Book updated successfully",
-            data: book
-        })
+            data: book,
+        });
+
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Faild to update book",
-            error
-        })
+            message: "Failed to update book",
+            error,
+        });
     }
-})
+});
+
+
 
 bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
     try {
