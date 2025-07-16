@@ -60,6 +60,9 @@ bookSchema.methods.updateAvailability = function () {
     if (this.copies <= 0) {
         this.available = false;
     }
+    else if (this.copies > 0) {
+        this.available = true;
+    }
 };
 bookSchema.post('findOneAndDelete', function (doc, next) {
     return __awaiter(this, void 0, void 0, function* () {

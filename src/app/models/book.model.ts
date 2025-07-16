@@ -51,6 +51,8 @@ const bookSchema = new Schema<IBook, {}, IBookMethods>({
 bookSchema.methods.updateAvailability = function () {
     if (this.copies <= 0) {
         this.available = false
+    } else if (this.copies > 0) {
+        this.available = true
     }
 }
 
